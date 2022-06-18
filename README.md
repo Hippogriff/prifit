@@ -2,10 +2,12 @@
 Published at Symposium on Geometry Processing 2022.
 
 [Gopal Sharma](https://hippogriff.github.io/), [Bidya Dash](https://www.linkedin.com/in/bidyadash/), [Aruni RoyChowdhury](https://arunirc.github.io/), [Matheus Gadelha](http://mgadelha.me/), [Marios Loizou](https://marios2019.github.io/), [Liangliang Cao](http://llcao.net/), [Rui Wang](https://people.cs.umass.edu/~ruiwang/), [Erik G. Learned-Miller](https://people.cs.umass.edu/~elm/), [Subhransu Maji](https://people.cs.umass.edu/~smaji/), [Evangelos Kalogerakis](https://people.cs.umass.edu/~kalo/)
+
 ***
 <p align="center">
   <img src="snip.PNG" alt="drawing" width="300"/>
 </p>
+
 **TL;DR** PrimFit uses primitive fitting within a semisupervised
 learning framework to learn 3D shape representations.
 Top row: 3D shapes represented as point clouds, where the
