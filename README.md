@@ -1,4 +1,4 @@
-# PRIMFIT: Learning to Fit Primitives Improves Few Shot Point Cloud Segmentation
+# PRIFIT: Learning to Fit Primitives Improves Few Shot Point Cloud Segmentation
 Published at Symposium on Geometry Processing 2022.
 
 [Gopal Sharma](https://hippogriff.github.io/), [Bidya Dash](https://www.linkedin.com/in/bidyadash/), [Aruni RoyChowdhury](https://arunirc.github.io/), [Matheus Gadelha](http://mgadelha.me/), [Marios Loizou](https://marios2019.github.io/), [Liangliang Cao](http://llcao.net/), [Rui Wang](https://people.cs.umass.edu/~ruiwang/), [Erik G. Learned-Miller](https://people.cs.umass.edu/~elm/), [Subhransu Maji](https://people.cs.umass.edu/~smaji/), [Evangelos Kalogerakis](https://people.cs.umass.edu/~kalo/)
