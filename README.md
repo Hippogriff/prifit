@@ -61,10 +61,10 @@ From the project root, the following code snippet trained a model jointly on sem
 python train_partseg_shapenet_multigpu.py --seed 786 --alpha 0.01 --split val --k_shot 10 \
                                           --batch_size 24 --step_size 1 --selfsup --epoch 20 \
                                           --learning_rate 0.01 --lmbda 1 --quantile 0.05 --msc_iterations 10 --max_num_clusters 25 \
-                                          --ss_path /home/bbdash/ShapeSelfSup/dataset/home/mgadelha/mnt_shared/self-sup-shape-myversion/data/ACDv2
+                                          --ss_path $path
 ```
 
-The models are stored in the experiment output folder, under `checkpoints` sub-folder. Tensorboard logs and console output as txt file are saved under sub-folder `logs`. The test performance is evaluated at the end of the training epochs (i.e. epoch 9 in this case) and written to the logfile.
+The models are stored in the experiment output folder, under `checkpoints` sub-folder. Tensorboard logs and console output as txt file are saved under sub-folder `logs`. The test performance is evaluated at the end of the training epochs (i.e. epoch 9 in this case) and written to the logfile. The directory `ss_path` ($path) refers to the directory where the ShapeNet self sueprvised dataset is downloaded to!
 
 ## Pretrain on ACD and test on ModelNet
 
