@@ -52,3 +52,51 @@ Download the **pre-computed ACD components** for the unlabeled ShapeNet core sha
 Download the aligned and resampled **ModelNet40** dataset for shape classication from [here](https://shapenet.cs.stanford.edu/media/modelnet40_normal_resampled.zip) and save in `data/modelnet40_normal_resampled/`.
 
 Thanks to yanx27 for an excellent PyTorch PointNet++ implementation [Pointnet_Pointnet2_pytorch](https://github.com/yanx27/Pointnet_Pointnet2_pytorch); our model implementation is based off that codebase.
+
+## Few-shot segmentation on ShapeNet
+
+From the project root, the following code snippet trained a model jointly on semantic segmentation on ShapeNetSeg, using 5 samples per shape category (i.e. 5 * 16 = 80 labeled training samples) and a pairwise contrastive loss over ACD components of the unlabeled ShapeNet Core data (for 9 epochs, decaying the learning rate at every epoch, with a batchsize of 24 shapes). 
+
+```
+python train_partseg_shapenet_multigpu.py --seed 2001 \
+        --k_shot 5 --batch_size 24 --selfsup --step_size 1  --epoch 9 \
+        --ss_path data/ACDv2/
+```
+
+The models are stored in the experiment output folder, under `checkpoints` sub-folder. Tensorboard logs and console output as txt file are saved under sub-folder `logs`. The test performance is evaluated at the end of the training epochs (i.e. epoch 9 in this case) and written to the logfile.
+
+## Pretrain on ACD and test on ModelNet
+
+**Pretraining on ACD:**
+
+The following example command trains a PointNet++ network on the ACD task. The `seed` is an integer that serves as an identifier for multiple runs of the same experiment. Random rotations around the "up" or Z axis is done as data augmentation during training(`--rotation_z`). Only the best performing model based on the **validation ACD loss** is stored under the experiment output folder, under `checkpoints` sub-folder. Tensorboard logs and console output as txt file are saved under sub-folder `logs`.
+
+```
+python pretrain_partseg_shapenet.py --rotation_z --seed 1001 --gpu 0 \
+                                    --model pointnet2_part_seg_msg  \
+                                    --batch_size 16 --step_size 1  \
+                                    --selfsup  --retain_overlaps \
+                                    --ss_path data/ACDv2
+
+**Evaluate pre-trained model on ModelNet40:**
+
+* Evaluating on ModelNet with cross-validation of SVM (takes a while): `python test_acdfeat_modelnet.py --gpu 0  --sqrt  --model pointnet2_part_seg_msg   --log_dir $LOG_DIR  --cross_val_svm`
+* Avoiding the cross-validation for the SVM C, one can also explicitly put the value as a runtime argument: `python test_acdfeat_modelnet.py --gpu 0  --sqrt  --model pointnet2_part_seg_msg   --log_dir $LOG_DIR --svm_c 220.0`
+* Examples of `LOG_DIR` can be found at the top of the `test_acdfeat_modelnet.py` code file. Basically it points to wherever the ACD pre-training script dumps its outputs.
+
+**Training using Convex Loss(Ellipsoid Fitting)**
+
+The following example command trains a PointNet++ network on the ACD task with Convex Loss (i.e. Ellipsoid Fitting). The `seed` is an integer that serves as an identifier for multiple runs of the same experiment. Random rotations around the "up" or Z axis is done as data augmentation during training(`--rotation_z`). Only the best performing model based on the **validation ACD loss** is stored under the experiment output folder, under `checkpoints` sub-folder. Tensorboard logs and console output as txt file are saved under sub-folder `logs`.
+
+```
+python train_partseg_shapenet_multigpu_validation.py --seed 2014 --k_shot 5 --batch_size 24 --step_size 1 --selfsup --epoch 15 --ss_path data/ACDv2
+
+```
+
+**Testing the model trained on Ellipsoid Fitting loss function**
+
+The following command loads the best model located in the directory under checkpoints and tests on the val/test split according to the input type 'split'. For visualizing, set visualize=True/False in the convex_loss function call. PointClouds are saved in a .xyz extension and can be viewed using MeshLab.
+
+```
+python testing_convex_loss.py --seed 2020 --k_shot 5 --batch_size 24 --step_size 1 --split val/test --pretrained_model $path
+
