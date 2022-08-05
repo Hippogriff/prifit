@@ -77,6 +77,7 @@ python pretrain_partseg_shapenet.py --rotation_z --seed 1001 --gpu 0 \
                                     --batch_size 16 --step_size 1  \
                                     --selfsup  --retain_overlaps \
                                     --ss_path data/ACDv2
+```
 
 **Evaluate pre-trained model on ModelNet40:**
 
@@ -99,4 +100,4 @@ The following command loads the best model located in the directory under checkp
 
 ```
 python testing_convex_loss.py --seed 2020 --k_shot 5 --batch_size 24 --step_size 1 --split val/test --pretrained_model $path
-
+```
