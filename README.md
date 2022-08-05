@@ -24,3 +24,23 @@ basic geometric primitives, such as cuboids and ellipsoids. The learned point re
 and improves their performance in the few-shot setting. According to our experiments on the widely used ShapeNet and PartNet benchmarks.
 PrimFit outperforms several state-of-the-art methods in this setting, suggesting that decomposability into primitives is a useful prior for learning representations predictive of semantic parts.
 We present a number of ablative experiments varying the choice of geometric primitives and downstream tasks to demonstrate the effectiveness of the method._
+
+Thanks to yanx27 for an excellent PyTorch PointNet++ implementation [Pointnet_Pointnet2_pytorch](https://github.com/yanx27/Pointnet_Pointnet2_pytorch); our model implementation is based off that codebase.
+
+## Environment setup
+
+CUDA setup:
+```
+CUDA: '9.2.148'    # torch.version.cuda
+CuDNN: 7603        # torch.backends.cudnn.version()
+```
+
+Conda environment:
+```
+conda create -n acd-env python=3.6
+pip install numpy six protobuf>=3.2.0
+pip install torch torchvision
+pip install matplotlib tqdm tensorboard_logger trimesh
+```
+
+For reference, we also tested using CUDA 10.1, and the corresponding torch and torchvision can be installed using `pip install torch==1.6.0+cu101 torchvision==0.7.0+cu101 -f https://download.pytorch.org/whl/torch_stable.html`.
