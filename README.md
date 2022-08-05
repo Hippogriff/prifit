@@ -25,7 +25,7 @@ and improves their performance in the few-shot setting. According to our experim
 PrimFit outperforms several state-of-the-art methods in this setting, suggesting that decomposability into primitives is a useful prior for learning representations predictive of semantic parts.
 We present a number of ablative experiments varying the choice of geometric primitives and downstream tasks to demonstrate the effectiveness of the method._
 
-Please find the full **paper** [here](https://arxiv.org/pdf/2112.13942.pdf).
+**Please find the full paper [here](https://arxiv.org/pdf/2112.13942.pdf).**
 ## Environment setup
 
 CUDA setup:
