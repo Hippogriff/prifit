@@ -55,12 +55,13 @@ Thanks to yanx27 for an excellent PyTorch PointNet++ implementation [Pointnet_Po
 
 ## Few-shot segmentation on ShapeNet
 
-From the project root, the following code snippet trained a model jointly on semantic segmentation on ShapeNetSeg, using 5 samples per shape category (i.e. 5 * 16 = 80 labeled training samples) and a pairwise contrastive loss over ACD components of the unlabeled ShapeNet Core data (for 9 epochs, decaying the learning rate at every epoch, with a batchsize of 24 shapes). 
+From the project root, the following code snippet trained a model jointly on semantic segmentation on ShapeNetSeg, using 10 samples per shape category (i.e. 10 * 16 = 160 labeled training samples) and a pairwise contrastive loss over ACD components of the unlabeled ShapeNet Core data (for 20 epochs, decaying the learning rate at every epoch, with a batchsize of 24 shapes). 
 
 ```
-python train_partseg_shapenet_multigpu.py --seed 2001 \
-        --k_shot 5 --batch_size 24 --selfsup --step_size 1  --epoch 9 \
-        --ss_path data/ACDv2/
+python train_partseg_shapenet_multigpu.py --seed 786 --alpha 0.01 --split val --k_shot 10 \
+                                          --batch_size 24 --step_size 1 --selfsup --epoch 20 \
+                                          --learning_rate 0.01 --lmbda 1 --quantile 0.05 --msc_iterations 10 --max_num_clusters 25 \
+                                          --ss_path /home/bbdash/ShapeSelfSup/dataset/home/mgadelha/mnt_shared/self-sup-shape-myversion/data/ACDv2
 ```
 
 The models are stored in the experiment output folder, under `checkpoints` sub-folder. Tensorboard logs and console output as txt file are saved under sub-folder `logs`. The test performance is evaluated at the end of the training epochs (i.e. epoch 9 in this case) and written to the logfile.
