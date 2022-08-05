@@ -25,6 +25,7 @@ and improves their performance in the few-shot setting. According to our experim
 PrimFit outperforms several state-of-the-art methods in this setting, suggesting that decomposability into primitives is a useful prior for learning representations predictive of semantic parts.
 We present a number of ablative experiments varying the choice of geometric primitives and downstream tasks to demonstrate the effectiveness of the method._
 
+Please find the full **paper** [here](https://arxiv.org/pdf/2112.13942.pdf).
 ## Environment setup
 
 CUDA setup:
@@ -66,22 +67,3 @@ python train_partseg_shapenet_multigpu.py --seed 786 --alpha 0.01 --split val --
 
 The models are stored in the experiment output folder, under `checkpoints` sub-folder. Tensorboard logs and console output as txt file are saved under sub-folder `logs`. The test performance is evaluated at the end of the training epochs (i.e. epoch 9 in this case) and written to the logfile. The directory `ss_path` ($path) refers to the directory where pre-computed ACD components for the unlabeled ShapeNet core shapes is downloaded to (2)!
 
-## Pretrain on ACD and test on ModelNet
-
-**Pretraining on ACD:**
-
-The following example command trains a PointNet++ network on the ACD task. The `seed` is an integer that serves as an identifier for multiple runs of the same experiment. Random rotations around the "up" or Z axis is done as data augmentation during training(`--rotation_z`). Only the best performing model based on the **validation ACD loss** is stored under the experiment output folder, under `checkpoints` sub-folder. Tensorboard logs and console output as txt file are saved under sub-folder `logs`.
-
-```
-python pretrain_partseg_shapenet.py --rotation_z --seed 1001 --gpu 0 \
-                                    --model pointnet2_part_seg_msg  \
-                                    --batch_size 16 --step_size 1  \
-                                    --selfsup  --retain_overlaps \
-                                    --ss_path data/ACDv2
-```
-
-**Evaluate pre-trained model on ModelNet40:**
-
-* Evaluating on ModelNet with cross-validation of SVM (takes a while): `python test_acdfeat_modelnet.py --gpu 0  --sqrt  --model pointnet2_part_seg_msg   --log_dir $LOG_DIR  --cross_val_svm`
-* Avoiding the cross-validation for the SVM C, one can also explicitly put the value as a runtime argument: `python test_acdfeat_modelnet.py --gpu 0  --sqrt  --model pointnet2_part_seg_msg   --log_dir $LOG_DIR --svm_c 220.0`
-* Examples of `LOG_DIR` can be found at the top of the `test_acdfeat_modelnet.py` code file. Basically it points to wherever the ACD pre-training script dumps its outputs.
