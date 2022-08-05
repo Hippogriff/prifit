@@ -93,11 +93,3 @@ The following example command trains a PointNet++ network on the ACD task with C
 python train_partseg_shapenet_multigpu_validation.py --seed 2014 --k_shot 5 --batch_size 24 --step_size 1 --selfsup --epoch 15 --ss_path data/ACDv2
 
 ```
-
-**Testing the model trained on Ellipsoid Fitting loss function**
-
-The following command loads the best model located in the directory under checkpoints and tests on the val/test split according to the input type 'split'. For visualizing, set visualize=True/False in the convex_loss function call. PointClouds are saved in a .xyz extension and can be viewed using MeshLab.
-
-```
-python testing_convex_loss.py --seed 2020 --k_shot 5 --batch_size 24 --step_size 1 --split val/test --pretrained_model $path
-```
