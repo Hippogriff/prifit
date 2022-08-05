@@ -84,12 +84,3 @@ python pretrain_partseg_shapenet.py --rotation_z --seed 1001 --gpu 0 \
 * Evaluating on ModelNet with cross-validation of SVM (takes a while): `python test_acdfeat_modelnet.py --gpu 0  --sqrt  --model pointnet2_part_seg_msg   --log_dir $LOG_DIR  --cross_val_svm`
 * Avoiding the cross-validation for the SVM C, one can also explicitly put the value as a runtime argument: `python test_acdfeat_modelnet.py --gpu 0  --sqrt  --model pointnet2_part_seg_msg   --log_dir $LOG_DIR --svm_c 220.0`
 * Examples of `LOG_DIR` can be found at the top of the `test_acdfeat_modelnet.py` code file. Basically it points to wherever the ACD pre-training script dumps its outputs.
-
-**Training using Convex Loss(Ellipsoid Fitting)**
-
-The following example command trains a PointNet++ network on the ACD task with Convex Loss (i.e. Ellipsoid Fitting). The `seed` is an integer that serves as an identifier for multiple runs of the same experiment. Random rotations around the "up" or Z axis is done as data augmentation during training(`--rotation_z`). Only the best performing model based on the **validation ACD loss** is stored under the experiment output folder, under `checkpoints` sub-folder. Tensorboard logs and console output as txt file are saved under sub-folder `logs`.
-
-```
-python train_partseg_shapenet_multigpu_validation.py --seed 2014 --k_shot 5 --batch_size 24 --step_size 1 --selfsup --epoch 15 --ss_path data/ACDv2
-
-```
