@@ -50,8 +50,6 @@ For reference, we also tested using CUDA 10.1, and the corresponding torch and t
 
 2. Download the **pre-computed ACD components** for the unlabeled ShapeNet core shapes from [here](http://maxwell.cs.umass.edu/zezhou/visualization/acd/ACDShapeNetSegPartAnno.zip) and extract its content in `data`.
 
-3. Download the aligned and resampled **ModelNet40** dataset for shape classication from [here](https://shapenet.cs.stanford.edu/media/modelnet40_normal_resampled.zip) and save in `data/modelnet40_normal_resampled/`.
-
 Thanks to yanx27 for an excellent PyTorch PointNet++ implementation [Pointnet_Pointnet2_pytorch](https://github.com/yanx27/Pointnet_Pointnet2_pytorch); our model implementation is based off that codebase.
 
 ## Few-shot segmentation on ShapeNet
