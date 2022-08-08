@@ -65,6 +65,7 @@ python train_partseg_shapenet_multigpu.py --seed 786 --alpha 0.01 --split val --
 
 The models are stored in the experiment output folder, under `checkpoints` sub-folder. Tensorboard logs and console output as txt file are saved under sub-folder `logs`. The test performance is evaluated at the end of the training epochs (i.e. epoch 9 in this case) and written to the logfile. The directory `ss_path` ($path) refers to the directory where pre-computed ACD components for the unlabeled ShapeNet core shapes is downloaded to (2)!
 
+## Citation
 
 You can cite the **paper** as:
 
