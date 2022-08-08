@@ -71,7 +71,7 @@ You can cite the **paper** as:
 ```
 @misc{prifit2022,
     title={PRIFIT: Learning to Fit Primitives Improves Few Shot Point Cloud Segmentation},
-    author={G. Sharma and B. Dash and A. RoyChowdhury and M. Gadelha1 and M. Loizou and L. Cao and R. Wang1 and E. G. Learned-Miller and S. Maji and E. Kalogerakis},
+    author={G. Sharma and B. Dash and A. RoyChowdhury and M. Gadelha and M. Loizou and L. Cao and R. Wang and E. G. Learned-Miller and S. Maji and E. Kalogerakis},
     year={2022},
     eprint={2112.13942},
     archivePrefix={arXiv},
